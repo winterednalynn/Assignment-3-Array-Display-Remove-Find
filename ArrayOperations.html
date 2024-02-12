@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operation</title>
+</head>
+<body>
+    <!--HTML CODING HERE-->
+    <h1>Array Functions</h1>
+
+    <p> Press Initialize Array to unveil integers</p> 
+    <button id = "InitializeArray">Initialize Array</button> <!--at a click of a button "Initialize Array"--> 
+    <p id="DisplayArray"></p> <!-- add a second button that displays the array myNumbers inside of a p tag-->
+    
+    <button id ="removeFromFront"> Remove First Two Numbers</button><p>Press Remove First Two Numbers to remove the first two integers in the collection</p>
+    <br>
+    <input id="EnterCatName" type = "text" placeholder="Enter cat name here">
+    <button id = "FindIndexOfCat">Find Index of Cat</button>
+    <br>
+    <p>Enter a cat's name to see if they take part in our array</p>
+    <p id="catIndDisplay"></p>
+
+    <!--JAVASCRIPT CODING HERE-->
+    <script>
+        const myNumbers=[]; // Create an empty array titled myNumbers ✔️
+        const cats = ['Kiki' , 'Leo', 'Milo', 'Cleo', 'Lily', 'Luna']; // ✔️
+
+        // button function 
+        document.getElementById('InitializeArray').addEventListener('click', () => 
+        {
+            myNumbers.length = 0 ; 
+        
+
+        //30 number objective 
+        for (let i = 0; i <30; i++) 
+        {
+            myNumbers.push(Math.floor(Math.random() * (100-10+1))+10); //Multiplies random # by the frame desire which is 10 & 100, +10 results the number transitioning the ranges 90 to 100 
+        }
+        
+        ArrayDisplayer(); // Prompting method to display integers 
+
+        });
+        document.getElementById('removeFromFront').addEventListener('click', () =>  //() => can alternative means function 
+        {
+            if(myNumbers.length>=2) 
+            {
+                myNumbers.splice(0,2); 
+                //The splice() method of Array instances changes 
+                //the contents of an array by removing
+                // or replacing existing elements and/or adding new elements in place.
+
+                ArrayDisplayer(); // with the collection being display we will be able to see the action of the button , cutting off 
+                //the two integers up front 
+            }
+            else
+            {
+                alert('Array removal of first 2 numbers did not succeed'); // implementing an else just in case if the code dont work
+            }
+        });
+        document.getElementById('FindIndexOfCat').addEventListener('click', () => {
+
+            const catName = document.getElementById('EnterCatName').value.trim(); // Prompting value from the text box will give us access to locate this particular submission. The objecting of .trim is purpose is to take any typos and approves the input.  
+            
+            if(catName) {
+                const catInd = cats.findIndex(cat => cat === catName); // cats is defined as a const array , .find index is a generated code that javascript offers to lcoate an integers. 
+                //The syntax string => string ===catName is an arrow function to find the index, this is a required format to use the findIndex method. 
+                //cat => translate a function with a singular parameter titled cat this present the cat in the array search of cats[] 
+                //cat===catName b/c catName is identify as the input by user this will assist in locating in the array exactly what the user is searching for
+
+                if(catInd !== -1) {
+                    document.getElementById('catIndDisplay').textContent = `Cat "${catName}" located in ${catInd}.`; //These will prompt when catname is found
+                }
+                }
+                else{
+                    document.getElementById('catIndDisplay').textContent = `"${catName}" cannot be located.`; // Test Error 
+                }
+            }
+            
+        ); 
+        function ArrayDisplayer() {
+            document.getElementById('DisplayArray').textContent = myNumbers.join(','); 
+            // The focus point is to generate the array , usisng textContent allow us to present the integers. 
+            //myNumbers is the variable that is used for the array that holds a collection of integer
+            //using .JOIN powers it to be listed beautifully with commas for easy to read. 
+
+        }
+
+        
+    </script>
+</body>
+</html>
+
+
+
+<!--1. create an empty array (myNumbers), at a click of a button "Initialize Array", add 30 random numbers ranging from 10 and 100
+
+2. add a second button that displays the array myNumbers inside of a p tag. Use the 'for of'  loop to display one element at a time in a single line
+
+3. add a button 'removeFromFront' that removes the first two numbers from the above array
+
+4. Given the following array  
+
+const cats = ['Kiki', 'Leo', 'Milo', 'Cleo', 'Lily', 'Luna'];
+add a button "Find index of cat" and a textbox to enter the name of the cat 
+
+when the button is clicked use the findIndex method of the Array object, display the cat index or display not found if not in the array, prefer  to use the arrow style function -->
